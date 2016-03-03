@@ -8,7 +8,8 @@
   - MySQL
   - ThymeLeaf
 
-  The plan is to add the following technologies and components:
+The plan is to add the following technologies and components:
+
   - Spring Security
   - JavaScript for form validation
 
