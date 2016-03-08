@@ -55,8 +55,33 @@ public class EmployeeController {
 		return "departments";
 	}
 	@RequestMapping("/update")
-	public String update(Model model, @RequestParam("employee") Employee emp){
+	public String update(Model model, @RequestParam("employee") Long id){
+		Employee emp = repository.findOne(id);
 		model.addAttribute("employee", emp);
 		return "update";
+	}
+	@RequestMapping("/updateservice")
+	public String updateService(Model model, @RequestParam("id")Long id, @RequestParam("name") String name,
+			@RequestParam("surname") String surname, @RequestParam("age") int age, 
+			@RequestParam("department") String department){
+		Employee emp = new Employee();
+		emp.setAge(age);
+		emp.setDepartment(department);
+		emp.setId(id);
+		emp.setName(name);
+		emp.setSurname(surname);
+		repository.save(emp);
+		List<Employee> employees = repository.findAll();
+		model.addAttribute("employees", employees);
+		return "list";
+	}
+	@RequestMapping("/delete")
+	public String delete(@RequestParam("employee") Long id, Model model){
+		Employee emp = new Employee();
+		emp.setId(id);
+		repository.delete(emp);
+		List<Employee> employees = repository.findAll();
+		model.addAttribute("employees", employees);
+		return "list";
 	}
 }
