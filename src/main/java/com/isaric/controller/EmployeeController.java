@@ -8,7 +8,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.isaric.model.Employee;
@@ -27,13 +30,14 @@ public class EmployeeController {
 	public String list(Model model){
 		List<Employee> employees = repository.findAll();
 		model.addAttribute("employees", employees);
+		model.addAttribute("transfer", new Employee());
 		return "list";
 	}
 	@RequestMapping("/add")
 	public String add(){
 		return "add";
 	}
-	@RequestMapping("/save")
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String save(@RequestParam("name") String name, @RequestParam("surname") String surname
 			,@RequestParam("age") String age,@RequestParam("department") String department){
 		Employee e = new Employee();
@@ -54,34 +58,19 @@ public class EmployeeController {
 		model.addAttribute("departments", departments);
 		return "departments";
 	}
-	@RequestMapping("/update")
-	public String update(Model model, @RequestParam("employee") Long id){
-		Employee emp = repository.findOne(id);
-		model.addAttribute("employee", emp);
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String update(@ModelAttribute Employee transfer, Model model){
+		model.addAttribute("transfer", transfer);
 		return "update";
 	}
 	@RequestMapping("/updateservice")
-	public String updateService(Model model, @RequestParam("id")Long id, @RequestParam("name") String name,
-			@RequestParam("surname") String surname, @RequestParam("age") int age, 
-			@RequestParam("department") String department){
-		Employee emp = new Employee();
-		emp.setAge(age);
-		emp.setDepartment(department);
-		emp.setId(id);
-		emp.setName(name);
-		emp.setSurname(surname);
-		repository.save(emp);
-		List<Employee> employees = repository.findAll();
-		model.addAttribute("employees", employees);
-		return "list";
+	public String updateService(@ModelAttribute("transfer") Employee employee){
+		repository.save(employee);
+		return "redirect:list";
 	}
 	@RequestMapping("/delete")
-	public String delete(@RequestParam("employee") Long id, Model model){
-		Employee emp = new Employee();
-		emp.setId(id);
-		repository.delete(emp);
-		List<Employee> employees = repository.findAll();
-		model.addAttribute("employees", employees);
-		return "list";
+	public String delete(@ModelAttribute Employee employee, Model model){
+		repository.delete(employee);
+		return "redirect:list";
 	}
 }
