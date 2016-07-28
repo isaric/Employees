@@ -12,8 +12,8 @@
 			<th>Number Of Employees</th>
 		</tr>
 		<tr th:each="dep : ${departments}">
-			<td th:text="${dep.key}"></td>
-			<td th:text="${dep.value}"></td>
+			<td th:text="${dep.name}"></td>
+			<td th:text="${dep.numberOfPeople}"></td>
 		</tr>
 	</table>
 	<br></br><a href="/">Back to welcome page</a>
