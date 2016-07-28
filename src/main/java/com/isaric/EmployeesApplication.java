@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan({"com.isaric","com.isaric.controller","com.isaric.model"})
+@ComponentScan({"com.isaric","com.isaric.controller","com.isaric.model","com.isaric.services","com.isaric.repositories"})
 @EnableAutoConfiguration
 public class EmployeesApplication {
 
