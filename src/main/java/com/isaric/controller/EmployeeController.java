@@ -34,18 +34,13 @@ public class EmployeeController {
 		return "list";
 	}
 	@RequestMapping("/add")
-	public String add(){
+	public String add(Model model){
+		model.addAttribute("newEmployee", new Employee());
 		return "add";
 	}
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String save(@RequestParam("name") String name, @RequestParam("surname") String surname
-			,@RequestParam("age") String age,@RequestParam("department") String department){
-		Employee e = new Employee();
-		e.setName(name);
-		e.setSurname(surname);
-		e.setAge(Integer.parseInt(age));
-		e.setDepartment(department);
-		employeeService.saveEmployee(e);
+	public String save(@ModelAttribute Employee newEmployee){
+		employeeService.saveEmployee(newEmployee);
 		return "welcome";
 	}
 	@RequestMapping("/departments")

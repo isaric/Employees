@@ -6,15 +6,15 @@
 </head>
 <body>
 	<h1>Add Employee Form</h1><br></br>
-	<form action = "/save" method = "post">
+	<form action = "#" method = "post" th:action="@{/save}" th:object="${newEmployee}">
 	Name:<br></br>
-	<input type="text" name="name"></input><br></br>
+	<input type="text" th:field="*{name}"></input><br></br>
 	Surname:<br></br>
-	<input type="text" name="surname"></input><br></br>
+	<input type="text" th:field="*{surname}"></input><br></br>
 	Age:<br></br>
-	<input type="text" name="age"></input><br></br>
+	<input type="text" th:field="*{age}"></input><br></br>
 	Department:<br></br>
-	<input type="text" name = "department"></input><br></br>
+	<input type="text" th:field="*{department}"></input><br></br>
 	<input type="submit" value = "Submit"></input>
 	</form>
 </body>
