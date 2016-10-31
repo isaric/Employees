@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th= "http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"></meta>
+<title>Registration Page</title>
+</head>
+<body>
+	<h2>Employee Tracker Registration Page</h2>
+	<form action="#" th:action="@{/register}" th:object="${form}" method="post">
+		<label>Email</label>
+		<input type="text" th:field="*{email}" />
+		<br/>
+		<label>Password</label>
+		<input type="password" th:field="*{password}" />
+		<br/>
+		<label>Repeat Password</label>
+		<input type="password" th:field="*{passwordRepeat}" />
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+		<input type="submit" value="Submit" name="submit"/>
+	</form>
+</body>
+</html>
