@@ -34,6 +34,18 @@ public class SecurityController {
 		return "login";
 	}
 	
+	@RequestMapping(value="/loggedout", method = RequestMethod.GET)
+	public String logout(Model model){
+		model.addAttribute("logout", "User has logged out");
+		return "login";
+	}
+	
+	@RequestMapping(value="/loginfailure", method = RequestMethod.GET)
+	public String loginFailed(Model model){
+		model.addAttribute("loginError", true);
+		return "login";
+	}
+	
 	@RequestMapping(value="/register", method=RequestMethod.GET)
 	public String register(Model model){
 		UserCreateForm form = new UserCreateForm();

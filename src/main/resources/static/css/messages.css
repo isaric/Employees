@@ -1,0 +1,17 @@
+@CHARSET "UTF-8";
+.error{
+	margin: 0 auto;
+	text-align:center;
+	width:30%;
+	color: red;
+	backgournd-color:lightred;
+	border-style: 5px solid red;
+}
+.info{
+	margin: 0 auto;
+	text-align:center;
+	width:30%;
+	color:blue;
+	background-color:lightblue;
+	border-style: 5px solid blue;
+}
