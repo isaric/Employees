@@ -5,12 +5,7 @@
   - Spring Boot
   - Spring Web MVC
   - Spring JPA/Hibernate
-  - MySQL
+  - Spring Security
+  - H2 embedded database
   - ThymeLeaf
 
-The plan is to add the following technologies and components:
-
-  - Spring Security
-  - JavaScript for form validation
-
-The main contributors are myself and Arnel Čiček. Arnel is currently working on the JavaScript form validation-
