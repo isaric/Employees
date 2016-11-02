@@ -9,13 +9,13 @@
 <body>
 	<div class="wrapper">
 		<h2>Employee Tracker Login Page</h2>
-		<div class="info" th:style="${logout}? 'display:block' : 'display:none'">
+		<div class="info" th:if="${logout}">
 			<p>You have logged out.Thank you for using the Employees application. Please visit us again.</p>
 		</div>
-		<div class="info" th:style="${userCreated}? 'display:block' : 'display:none'">
+		<div class="info" th:if="${userCreated}">
 			<p>Your account has been created. Please login using the login form on this page.</p>
 		</div>
-		<div class="error" th:style="${loginError}? 'display:block' : 'display:none'">
+		<div class="error" th:if="${loginError}">
 			<p>Your username or password do not match our records. Please try again or contact the administrator.</p>
 		</div>
 		<form role="form" action="/login" method="post">

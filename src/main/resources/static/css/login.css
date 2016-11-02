@@ -3,3 +3,17 @@
 	width:50%;
 	margin:0 auto;
 }
+h2{
+	margin: 0 auto;
+	text-aling: center;
+}
+form{
+	width:100%;
+	margin: 0 auto;
+}
+form div{
+	margin: 0 auto;
+}
+form input{
+	width:50%;
+}

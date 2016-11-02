@@ -42,5 +42,15 @@ public class UserServiceImpl implements UserService {
 		newUser.setPasswordHash(new BCryptPasswordEncoder().encode(form.getPassword()));
 		return userRepository.save(newUser);
 	}
+	
+	@Override
+	public void deleteUser(User user){
+		userRepository.delete(user);
+	}
+	
+	@Override
+	public void deleteUser(String email){
+		userRepository.deleteByEmail(email);
+	}
 
 }
