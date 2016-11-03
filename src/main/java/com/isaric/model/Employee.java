@@ -52,4 +52,15 @@ public class Employee {
 	public void setDepartment(String department) {
 		this.department = department;
 	}
+	
+	@Override
+	public boolean equals(Object object){
+		if (!(object instanceof Employee)) return false;
+		Employee emp = (Employee) object;
+		if (!emp.getName().equals(this.getName())) return false;
+		if (!emp.getSurname().equals(this.getSurname())) return false;
+		if (!emp.getDepartment().equals(this.getDepartment())) return false;
+		if (emp.getAge() != this.getAge()) return false;
+		return true;
+	}
 }

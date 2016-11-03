@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -21,6 +22,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.isaric.EmployeesApplication;
 import com.isaric.forms.UserCreateForm;
 import com.isaric.model.User;
+import com.isaric.testdata.TestDataStubber;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = EmployeesApplication.class)
@@ -28,32 +30,23 @@ import com.isaric.model.User;
 @WebIntegrationTest
 public class UserServiceImplIntegrationTest {
 	
-	private static String testUser1 = "test1@test.com";
-	private static String testUser2 = "test2@test.com";
-	private static String testUser3 = "test3@test.com";
-	private static String testPassword = "password";
-	
 	@Autowired
 	private UserServiceImpl userService;
 	
+	private static List<UserCreateForm> sampleUserForms = TestDataStubber.getSampleUserForms();
+	
 	@Before
 	public void init(){
-		UserCreateForm form = new UserCreateForm();
-		form.setEmail(testUser1);
-		form.setPassword(testPassword);
-		userService.create(form);
-		form.setEmail(testUser2);
-		userService.create(form);
-		form.setEmail(testUser3);
-		userService.create(form);
+		for (UserCreateForm form : sampleUserForms){
+			userService.create(form);
+		}
 	}
 	
 	@After
 	public void teardown(){
-		userService.deleteUser(testUser1);
-		userService.deleteUser(testUser2);
-		userService.deleteUser(testUser3);
-		
+		for (UserCreateForm form : sampleUserForms){
+			userService.deleteUser(form.getEmail());
+		}
 	}
 	
 	@Test
@@ -77,11 +70,12 @@ public class UserServiceImplIntegrationTest {
 		Collection<User> users = userService.getAllUsers();
 		assertEquals(3,users.size());
 		users = users.stream().filter((User u) -> {
-			return (u.getEmail().equals("test1@test.com") || 
-					u.getEmail().equals("test2@test.com") || 
-					u.getEmail().equals("test3@test.com"));
-			
-			}).collect(Collectors.toList());
+			boolean contains = false;
+			for (UserCreateForm form : sampleUserForms){
+				if (form.getEmail().equals(u.getEmail())) contains = true;
+			}
+			return contains;
+		}).collect(Collectors.toList());
 		assertEquals(3,users.size());
 	}
 }
