@@ -8,4 +8,6 @@
   - Spring Security
   - H2 embedded database
   - ThymeLeaf
+  - JUnit
+  - Mockito
 
