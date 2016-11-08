@@ -27,4 +27,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	public Employee findEmployeeById(long id) {
 		return repository.findOne(id);
 	}
+	public void setRepository(EmployeeRepository repository) {
+		this.repository = repository;
+	}
 }

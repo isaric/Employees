@@ -57,6 +57,7 @@ public class Employee {
 	public boolean equals(Object object){
 		if (!(object instanceof Employee)) return false;
 		Employee emp = (Employee) object;
+		if ((emp.getId() != 0L) && (this.getId() != 0L)) return emp.getId() == this.getId();
 		if (!emp.getName().equals(this.getName())) return false;
 		if (!emp.getSurname().equals(this.getSurname())) return false;
 		if (!emp.getDepartment().equals(this.getDepartment())) return false;

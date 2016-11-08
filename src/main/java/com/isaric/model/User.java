@@ -58,5 +58,12 @@ public class User {
 		this.role = role;
 	}
 	
+	@Override
+	public boolean equals(Object obj){
+		if (!(obj instanceof User)) return false;
+		User user = (User) obj;
+		return user.getEmail().equals(this.getEmail());
+		
+	}
 }
 

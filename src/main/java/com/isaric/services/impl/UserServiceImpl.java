@@ -53,4 +53,8 @@ public class UserServiceImpl implements UserService {
 		userRepository.deleteByEmail(email);
 	}
 
+	public void setUserRepository(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
+
 }

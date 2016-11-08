@@ -3,8 +3,11 @@ package com.isaric.testdata;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import com.isaric.forms.UserCreateForm;
 import com.isaric.model.Employee;
+import com.isaric.model.User;
 
 public class TestDataStubber {
 	
@@ -46,6 +49,21 @@ public class TestDataStubber {
 		sampleUsers.add(form2);
 		sampleUsers.add(form3);
 		return sampleUsers;
+	}
+	private static List<User> convertFormListToUserList(List<UserCreateForm> list){
+		List<UserCreateForm> formList = getSampleUserForms();
+		List<User> userList = new ArrayList<>();
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		for (UserCreateForm form : formList){
+			User buffer = new User();
+			buffer.setEmail(form.getEmail());
+			buffer.setPasswordHash(encoder.encode(form.getPassword()));
+			userList.add(buffer);
+		}
+		return userList;
+	}
+	public static List<User> getSampleUsers(){
+		return convertFormListToUserList(getSampleUserForms());
 	}
 	
 }
